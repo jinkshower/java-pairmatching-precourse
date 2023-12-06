@@ -21,6 +21,7 @@ public class MainController {
         this.inputView = inputView;
         this.outputView = outputView;
         this.matchingService = new MatchingService(new CrewNameReader());
+        matchingService.assignCrew();
     }
 
     public void run() {
@@ -28,13 +29,23 @@ public class MainController {
         if (programCommand == ProgramCommand.PAIR_MATCHING) {
             matchPair();
         }
+        if (programCommand == ProgramCommand.PAIR_QUERY) {
+            searchPair();
+        }
     }
 
     private void matchPair() {
         InfoVariable infoVariable = ExceptionHandler.repeatUntilValid(this::handleInfoChoice);
-        matchingService.assignCrew();
         matchingService.service(infoVariable);
         outputView.printMatchResult(matchingService.getMatchResult(infoVariable));
+        run();
+    }
+
+    private void searchPair() {
+        outputView.printInfo();
+        InfoVariable infoVariable = ExceptionHandler.repeatUntilValid(this::handleInfoChoice);
+        outputView.printMatchResult(matchingService.getMatchResult(infoVariable));
+        run();
     }
 
     private InfoVariable handleInfoChoice() {

@@ -26,5 +26,7 @@ public class OutputView {
     public void printMatchResult(String result) {
         System.out.println("\n페어 매칭 결과입니다.\n");
         System.out.printf(result);
+        System.out.println();
+        System.out.println();
     }
 }
