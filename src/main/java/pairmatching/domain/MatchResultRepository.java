@@ -33,7 +33,7 @@ public class MatchResultRepository {
         return results.stream()
                 .filter(matchResult -> matchResult.hasSameInfoVariable(infoVariable))
                 .findAny()
-                .orElseThrow(() -> new IllegalArgumentException("[ERROR] 유효한 입력이 아닙니다"));
+                .orElseThrow(() -> new IllegalArgumentException("[ERROR]유효한 입력이 아닙니다"));
     }
 
     private static String covertToString(MatchResult matchResult) {
