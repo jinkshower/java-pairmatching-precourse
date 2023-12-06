@@ -34,6 +34,7 @@ public class MainController {
         InfoVariable infoVariable = ExceptionHandler.repeatUntilValid(this::handleInfoChoice);
         matchingService.assignCrew();
         matchingService.service(infoVariable);
+        outputView.printMatchResult(matchingService.getMatchResult(infoVariable));
     }
 
     private InfoVariable handleInfoChoice() {

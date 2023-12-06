@@ -46,4 +46,8 @@ public class MatchingService {
         PairMatcher pairMatcher = new PairMatcher(crews);
         return pairMatcher.execute();
     }
+
+    public String getMatchResult(InfoVariable infoVariable) {
+        return MatchResultRepository.getMatchResult(infoVariable);
+    }
 }

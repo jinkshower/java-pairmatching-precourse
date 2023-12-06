@@ -22,4 +22,9 @@ public class OutputView {
                 + "  - 레벨5: \n"
                 + "############################################");
     }
+
+    public void printMatchResult(String result) {
+        System.out.println("\n페어 매칭 결과입니다.\n");
+        System.out.printf(result);
+    }
 }

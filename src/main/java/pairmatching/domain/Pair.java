@@ -1,6 +1,7 @@
 package pairmatching.domain;
 
 import java.util.List;
+import java.util.StringJoiner;
 
 public class Pair {
 
@@ -10,4 +11,11 @@ public class Pair {
         this.pair = pair;
     }
 
+    public String getPairNames() {
+        StringJoiner stringJoiner = new StringJoiner(" : ");
+        for (Crew crew: pair) {
+            stringJoiner.add(crew.getName());
+        }
+        return stringJoiner.toString();
+    }
 }

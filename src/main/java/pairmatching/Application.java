@@ -8,7 +8,7 @@ public class Application {
     public static void main(String[] args) {
         InputView inputView = InputView.getInstance();
         OutputView outputView = OutputView.getInstance();
-        MainController gameController = new MainController(inputView, outputView);
-        gameController.run();
+        MainController mainController = new MainController(inputView, outputView);
+        mainController.run();
     }
 }
