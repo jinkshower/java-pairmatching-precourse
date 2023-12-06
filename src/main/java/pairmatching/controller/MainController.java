@@ -1,5 +1,7 @@
 package pairmatching.controller;
 
+import java.util.List;
+import pairmatching.domain.CrewNameReader;
 import pairmatching.domain.ProgramCommand;
 import pairmatching.util.ExceptionHandler;
 import pairmatching.view.InputView;
@@ -16,8 +18,16 @@ public class MainController {
     }
 
     public void run() {
+        CrewNameReader crewNameReader = new CrewNameReader();
+
         ProgramCommand programCommand = ExceptionHandler.repeatUntilValid(this::handleProgramCommand);
-        System.out.println(programCommand);
+        if (programCommand == ProgramCommand.PAIR_MATCHING) {
+            matchPair();
+        }
+    }
+
+    private void matchPair() {
+        System.out.println("matched");
     }
 
     private ProgramCommand handleProgramCommand() {
