@@ -39,7 +39,7 @@ public class MatchResultRepository {
     private static String covertToString(MatchResult matchResult) {
         List<Pair> result = matchResult.getPairs();
         StringJoiner stringJoiner = new StringJoiner("\n");
-        for (Pair pair: result) {
+        for (Pair pair : result) {
             stringJoiner.add(pair.getPairNames());
         }
         return stringJoiner.toString();

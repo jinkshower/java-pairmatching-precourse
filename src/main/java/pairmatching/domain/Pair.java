@@ -13,7 +13,7 @@ public class Pair {
 
     public String getPairNames() {
         StringJoiner stringJoiner = new StringJoiner(" : ");
-        for (Crew crew: pair) {
+        for (Crew crew : pair) {
             stringJoiner.add(crew.getName());
         }
         return stringJoiner.toString();

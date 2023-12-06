@@ -77,9 +77,10 @@ public class MainController {
     private InfoVariable handleInfoChoice() {
         String input = inputView.readChoice();
 
-        String[] split = input.replace(" ","").split(",");
+        String[] split = input.replace(" ", "").split(",");
         return new InfoVariable(Course.from(split[0]), Level.from(split[1]), Mission.from(split[2]));
     }
+
     private ProgramCommand handleProgramCommand() {
         String input = inputView.readCommand();
         return ProgramCommand.from(input);

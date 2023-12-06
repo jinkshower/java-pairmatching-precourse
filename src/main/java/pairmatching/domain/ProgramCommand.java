@@ -1,7 +1,6 @@
 package pairmatching.domain;
 
 import java.util.Arrays;
-import javax.swing.Popup;
 
 public enum ProgramCommand {
 
