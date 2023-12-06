@@ -1,5 +1,7 @@
 package pairmatching.controller;
 
+import pairmatching.domain.ProgramCommand;
+import pairmatching.util.ExceptionHandler;
 import pairmatching.view.InputView;
 import pairmatching.view.OutputView;
 
@@ -14,6 +16,12 @@ public class MainController {
     }
 
     public void run() {
-        
+        ProgramCommand programCommand = ExceptionHandler.repeatUntilValid(this::handleProgramCommand);
+        System.out.println(programCommand);
+    }
+
+    private ProgramCommand handleProgramCommand() {
+        String input = inputView.readCommand();
+        return ProgramCommand.from(input);
     }
 }
