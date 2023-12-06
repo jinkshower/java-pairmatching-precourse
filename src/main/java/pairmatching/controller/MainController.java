@@ -4,6 +4,7 @@ import pairmatching.domain.Course;
 import pairmatching.domain.CrewNameReader;
 import pairmatching.domain.InfoVariable;
 import pairmatching.domain.Level;
+import pairmatching.domain.MatchResultRepository;
 import pairmatching.domain.Mission;
 import pairmatching.domain.ProgramCommand;
 import pairmatching.service.MatchingService;
@@ -32,6 +33,9 @@ public class MainController {
         if (programCommand == ProgramCommand.PAIR_QUERY) {
             searchPair();
         }
+        if (programCommand == ProgramCommand.PAIR_INITIALIZATION) {
+            resetMatch();
+        }
     }
 
     private void matchPair() {
@@ -45,6 +49,12 @@ public class MainController {
         outputView.printInfo();
         InfoVariable infoVariable = ExceptionHandler.repeatUntilValid(this::handleInfoChoice);
         outputView.printMatchResult(matchingService.getMatchResult(infoVariable));
+        run();
+    }
+
+    private void resetMatch() {
+        MatchResultRepository.clear();
+        outputView.printClearMessage();
         run();
     }
 

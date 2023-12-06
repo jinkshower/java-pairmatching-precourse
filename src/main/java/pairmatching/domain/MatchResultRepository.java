@@ -31,4 +31,8 @@ public class MatchResultRepository {
         }
         return stringJoiner.toString();
     }
+
+    public static void clear() {
+        results = new ArrayList<>();
+    }
 }
