@@ -7,6 +7,7 @@ import pairmatching.domain.Level;
 import pairmatching.domain.MatchResultRepository;
 import pairmatching.domain.Mission;
 import pairmatching.domain.ProgramCommand;
+import pairmatching.domain.ReinitializingCommand;
 import pairmatching.service.MatchingService;
 import pairmatching.util.ExceptionHandler;
 import pairmatching.view.InputView;
@@ -40,6 +41,9 @@ public class MainController {
 
     private void matchPair() {
         InfoVariable infoVariable = ExceptionHandler.repeatUntilValid(this::handleInfoChoice);
+        if (!MatchResultRepository.isEmpty() && MatchResultRepository.hasResult(infoVariable)) {
+            reinitialize(infoVariable);
+        }
         matchingService.service(infoVariable);
         outputView.printMatchResult(matchingService.getMatchResult(infoVariable));
         run();
@@ -58,6 +62,16 @@ public class MainController {
         run();
     }
 
+    private void reinitialize(InfoVariable infoVariable) {
+        ReinitializingCommand reinitializingCommand = ExceptionHandler.repeatUntilValid(this::handleReinitializing);
+        if (reinitializingCommand == ReinitializingCommand.YES) {
+            matchingService.rematch(infoVariable);
+            outputView.printMatchResult(matchingService.getMatchResult(infoVariable));
+            run();
+            return;
+        }
+    }
+
     private InfoVariable handleInfoChoice() {
         String input = inputView.readChoice();
 
@@ -67,5 +81,10 @@ public class MainController {
     private ProgramCommand handleProgramCommand() {
         String input = inputView.readCommand();
         return ProgramCommand.from(input);
+    }
+
+    private ReinitializingCommand handleReinitializing() {
+        String input = inputView.readReinitialize();
+        return ReinitializingCommand.from(input);
     }
 }

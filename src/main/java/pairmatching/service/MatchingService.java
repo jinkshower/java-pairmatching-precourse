@@ -42,6 +42,16 @@ public class MatchingService {
         MatchResultRepository.add(matchResult);
     }
 
+    public void rematch(InfoVariable infoVariable) {
+        if (infoVariable.isBackend()) {
+            MatchResult matchResult = new MatchResult(infoVariable, pairMatch(backendCrew));
+            MatchResultRepository.reassign(matchResult);
+            return;
+        }
+        MatchResult matchResult = new MatchResult(infoVariable, pairMatch(frontendCrew));
+        MatchResultRepository.reassign(matchResult);
+    }
+
     private List<Pair> pairMatch(List<Crew> crews) {
         PairMatcher pairMatcher = new PairMatcher(crews);
         return pairMatcher.execute();

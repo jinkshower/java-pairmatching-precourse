@@ -12,8 +12,21 @@ public class MatchResultRepository {
         results.add(matchResult);
     }
 
+    public static void reassign(MatchResult matchResult) {
+        results.set(FindIndex(matchResult), matchResult);
+    }
+
     public static String getMatchResult(InfoVariable infoVariable) {
         return covertToString(FindByInfo(infoVariable));
+    }
+
+    private static int FindIndex(MatchResult othermatchResult) {
+        for (int i = 0; i < results.size(); i++) {
+            if (results.get(i).equals(othermatchResult)) {
+                return i;
+            }
+        }
+        return 0;
     }
 
     public static MatchResult FindByInfo(InfoVariable infoVariable) {
@@ -30,6 +43,14 @@ public class MatchResultRepository {
             stringJoiner.add(pair.getPairNames());
         }
         return stringJoiner.toString();
+    }
+
+    public static boolean hasResult(InfoVariable infoVariable) {
+        return FindByInfo(infoVariable) != null;
+    }
+
+    public static boolean isEmpty() {
+        return results.isEmpty();
     }
 
     public static void clear() {
