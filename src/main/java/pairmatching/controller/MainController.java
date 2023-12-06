@@ -43,10 +43,22 @@ public class MainController {
         InfoVariable infoVariable = ExceptionHandler.repeatUntilValid(this::handleInfoChoice);
         if (!MatchResultRepository.isEmpty() && MatchResultRepository.hasResult(infoVariable)) {
             reinitialize(infoVariable);
+            return;
         }
         matchingService.service(infoVariable);
         outputView.printMatchResult(matchingService.getMatchResult(infoVariable));
         run();
+    }
+
+    private void reinitialize(InfoVariable infoVariable) {
+        ReinitializingCommand reinitializingCommand = ExceptionHandler.repeatUntilValid(this::handleReinitializing);
+        if (reinitializingCommand == ReinitializingCommand.YES) {
+            matchingService.rematch(infoVariable);
+            outputView.printMatchResult(matchingService.getMatchResult(infoVariable));
+            run();
+            return;
+        }
+        matchPair();
     }
 
     private void searchPair() {
@@ -60,16 +72,6 @@ public class MainController {
         MatchResultRepository.clear();
         outputView.printClearMessage();
         run();
-    }
-
-    private void reinitialize(InfoVariable infoVariable) {
-        ReinitializingCommand reinitializingCommand = ExceptionHandler.repeatUntilValid(this::handleReinitializing);
-        if (reinitializingCommand == ReinitializingCommand.YES) {
-            matchingService.rematch(infoVariable);
-            outputView.printMatchResult(matchingService.getMatchResult(infoVariable));
-            run();
-            return;
-        }
     }
 
     private InfoVariable handleInfoChoice() {
