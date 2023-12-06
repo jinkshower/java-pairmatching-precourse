@@ -1,13 +1,15 @@
 package pairmatching.domain;
 
+import java.util.List;
+
 public class MatchResult {
 
     private final InfoVariable infoVariable;
-    private final String result;
+    private final List<Pair> pairs;
 
-    public MatchResult(InfoVariable infoVariable, String result) {
+    public MatchResult(InfoVariable infoVariable, List<Pair> pairs) {
         this.infoVariable = infoVariable;
-        this.result = result;
+        this.pairs = pairs;
     }
 
 

@@ -6,6 +6,9 @@ import pairmatching.domain.Course;
 import pairmatching.domain.Crew;
 import pairmatching.domain.CrewNameReader;
 import pairmatching.domain.InfoVariable;
+import pairmatching.domain.MatchResult;
+import pairmatching.domain.MatchResultRepository;
+import pairmatching.domain.Pair;
 import pairmatching.domain.PairMatcher;
 
 public class MatchingService {
@@ -31,14 +34,16 @@ public class MatchingService {
 
     public void service(InfoVariable infoVariable) {
         if (infoVariable.isBackend()) {
-            pairMatch(backendCrew);
+            MatchResult matchResult = new MatchResult(infoVariable, pairMatch(backendCrew));
+            MatchResultRepository.add(matchResult);
             return;
         }
-        pairMatch(frontendCrew);
+        MatchResult matchResult = new MatchResult(infoVariable, pairMatch(frontendCrew));
+        MatchResultRepository.add(matchResult);
     }
 
-    private void pairMatch(List<Crew> crews) {
+    private List<Pair> pairMatch(List<Crew> crews) {
         PairMatcher pairMatcher = new PairMatcher(crews);
-        pairMatcher.execute();
+        return pairMatcher.execute();
     }
 }
